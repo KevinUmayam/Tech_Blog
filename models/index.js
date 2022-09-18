@@ -32,4 +32,4 @@ Comment.belongsTo(Techpost, {
   onDelete: 'CASCADE',
 });
 
-module.exports = { User, Techpost };
+module.exports = { User, Techpost, Comment };
