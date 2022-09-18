@@ -19,11 +19,19 @@ Comment.init(
         key: 'id',
       },
     },
+    post_id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      references: {
+        model: 'techpost',
+        key: 'id',
+      },
+    },
     title: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    content: {
+    commentary: {
       type: DataTypes.TEXT,
       allowNull: false,
     },
