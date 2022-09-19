@@ -21,6 +21,6 @@ const postData = [
   },
 ];
 
-const seedPost = () => User.bulkCreate(postData);
+const seedPost = () => Techpost.bulkCreate(postData);
 
 module.exports = seedPost;
