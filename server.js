@@ -39,7 +39,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use(routes);
-require('./models');
+// require('./models');
 
 sequelizeConnection.sync({ force: false }).then(() => {
   app.listen(PORT, () => console.log('Now listening'));

@@ -6,10 +6,28 @@ router.get('/', withAuth, async (req, res) => {
   try {
     // Get all projects and JOIN with user data
     const postData = await Techpost.findAll({
+      where: {
+        user_id: req.session.user_id,
+      },
+      attributes: ['id', 'title', 'contents', 'date_created'],
       include: [
         {
+          model: Comment,
+          attributes: [
+            'id',
+            'commentary',
+            'post_id',
+            'user_id',
+            'date_created',
+          ],
+          include: {
+            model: User,
+            attributes: ['username'],
+          },
+        },
+        {
           model: User,
-          attributes: ['name'],
+          attributes: ['username'],
         },
       ],
     });
@@ -18,23 +36,10 @@ router.get('/', withAuth, async (req, res) => {
     const post = postData.map((post) => post.get({ plain: true }));
 
     // Pass serialized data and session flag into template
-    res.render('homepage', {
-      post,
-      logged_in: req.session.logged_in,
-    });
+    res.render('dashboard', { post, loggedIn: true });
   } catch (err) {
     res.status(500).json(err);
   }
-});
-
-router.get('/login', (req, res) => {
-  // If the user is already logged in, redirect the request to another route
-  if (req.session.logged_in) {
-    res.redirect('/dashboard');
-    return;
-  }
-
-  res.render('login');
 });
 
 module.exports = router;

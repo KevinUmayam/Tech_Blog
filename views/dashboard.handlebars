@@ -1,0 +1,17 @@
+{{! dashboard }}
+{{#if post.length}}
+
+  <div class='post-body'>
+    <ul class='post-list'>
+      {{#each post}}
+
+        <li class='post-list-item'>
+          <div>{{title}}</div>
+          <div>{{content}}</div>
+          <div>{{format_date date_created}}</div>
+        </li>
+      {{/each}}
+    </ul>
+  </div>
+
+{{/if}}
